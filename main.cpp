@@ -150,10 +150,26 @@ SkyLine *SkyLine::Merge(SkyLine *other)
     } 
     return res; 
 } 
+const int MAXN=1e5+100;
+int n=10;
 
 int main(int argc, char* argv[]){
 	srand(time(NULL));
-
+    if(argc >= 2){
+		try{
+			std::cout << "\n" << argv[1] << '\n' ;
+			int s = atoi(argv[1]);
+	
+			if(s>=2 and s<=MAXN){
+				n = s;
+			}else{
+				std::cout << "Numer of strucutres must be between 2 and "<< MAXN <<" . Using default." << std::endl;
+			}
+		}
+		catch(...){
+			std::cout << "Invalid argument was passed, number of strucutres must be an integer. Using default." << std::endl;
+		}
+	}
 	RenderWindow window(VideoMode(WIDTH, HEIGHT), "SkyLine");
 	auto desktop = VideoMode::getDesktopMode();
 	Vector2i v2i(desktop.width/2 - window.getSize().x/2, desktop.height/2 - window.getSize().y/2);
@@ -174,16 +190,11 @@ int main(int argc, char* argv[]){
 	window.draw(sprite);
 	window.display();
 
-
-	Font font;
-	font.loadFromFile("Sansation_Regular.ttf");
-
 	// int n=8;
     // Building arr[] = {{10, 11, 50}, {20, 6, 70}, {30, 13, 90}, 
     //                   {120, 7, 160}, {140, 3, 250}, {190, 18, 220}, 
     //                   {230, 130, 290}, {240, 4, 280}};
-    int n=40;
-	Building arr[40];
+	Building arr[MAXN];
 	for(int i=0; i<n; ++i){
 		int l=rand()%WIDTH;
 		int r=rand()%WIDTH;
@@ -215,7 +226,7 @@ int main(int argc, char* argv[]){
 				window.close();
 			}
 		}
-        if(pos==last) continue;
+        if(pos==last-1) continue;
         auto next = aux[++pos];
         lines[0].position = Vector2f(curr.left, HEIGHT-curr.ht);
         lines[1].position = Vector2f(next.left, HEIGHT-curr.ht);
