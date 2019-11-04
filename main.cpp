@@ -3,15 +3,13 @@
 #include <time.h>
 #include <unistd.h>
 
-#define UP 0
-#define RIGHT 1
-#define DOWN 2
-#define LEFT 3
-
 using namespace sf;
 
 const int WIDTH=600;
 const int HEIGHT=480;
+
+const int MAXN=1e5+100;
+int n=10;
 
 int sleep_t = 500000;
 
@@ -150,8 +148,6 @@ SkyLine *SkyLine::Merge(SkyLine *other)
     } 
     return res; 
 } 
-const int MAXN=1e5+100;
-int n=10;
 
 int main(int argc, char* argv[]){
 	srand(time(NULL));
@@ -202,18 +198,41 @@ int main(int argc, char* argv[]){
 		else if(l>r) std::swap(l, r);
 		arr[i] = Building {l, rand()%HEIGHT, r};
 	}
+
+    Sprite temp_sprite;
+	RenderTexture temp_t;
+	temp_t.create(WIDTH, HEIGHT);
+	temp_t.setSmooth(true);
+	temp_sprite.setTexture(temp_t.getTexture());
+
+    VertexArray buildings(LinesStrip, 4);
+    for(int i=0; i<n; ++i){
+        buildings[0].position = Vector2f(arr[i].left, HEIGHT);
+        buildings[1].position = Vector2f(arr[i].left, HEIGHT-arr[i].ht);
+        buildings[2].position = Vector2f(arr[i].right, HEIGHT-arr[i].ht);
+        buildings[3].position = Vector2f(arr[i].right, HEIGHT);
+
+        temp_t.draw(buildings);
+        temp_t.display();
+    }
+    window.draw(temp_sprite);
+    window.display();
+
     std::sort(arr, arr+n);
 	SkyLine *ptr = findSkyline(arr, 0, n-1);
 	std::cout << " Skyline for given buildings is \n"; 
     ptr->print();
+
+    usleep(5*sleep_t);
+    window.clear();
+
     auto aux = ptr->arr;
+    int last = ptr->n;
     auto curr = aux[0];
     int pos=0;
-    int last = ptr->n;
     VertexArray lines(Lines, 2);
     lines[0].position = Vector2f(curr.left, HEIGHT);
     lines[1].position = Vector2f(curr.left, HEIGHT-curr.ht);
-    usleep(sleep_t);
 
     t.draw(lines);
     t.display();
