@@ -20,7 +20,7 @@ public:
     int ht;    // height 
     int right; // x coordinate of right side 
 
-    const bool operator <(const Building &p){
+    bool operator <(const Building &p){
         if(left == p.left){
             if(ht == p.ht){
                 return right < p.right;
