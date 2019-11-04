@@ -15,7 +15,9 @@
 Dado n construções retangulares em uma dimensão 2D, mostre a visão horizontal das construções, eliminando as linhas não visíveis. A entrada foi gerada de maneira randômica.
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+![screen 1](screenshots/1.png)
+![screen 2](screenshots/2.png)
+![screen 3](screenshots/3.png)
 
 ## Instalação 
 **Linguagem**: C++<br>
