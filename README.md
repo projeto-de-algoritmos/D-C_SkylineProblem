@@ -12,7 +12,9 @@
 | 17/0038891  |  Leonardo de Araujo Medeiros |
 
 ## Sobre
-Dado n construções retangulares em uma dimensão 2D, mostre a visão horizontal das construções, eliminando as linhas não visíveis. A entrada foi gerada de maneira randômica.
+Nesta aplicação é mostrada visualmente a solução do problema conhecido como "Skyline", que consite basicamente no enunciado: Dado n construções retangulares em uma dimensão 2D, mostre a visão horizontal das construções, eliminando as linhas não visíveis. 
+A solução trivial para este problema consiste em comparar todos as estruturas a custo O(n²), todavia, o problema pode ser solucionado com complexidade O(n log(n)) usando a técnica de Dividr para conquistar, como implementado neste programa.
+A entrada foi gerada de maneira pseudo-randômica.
 
 ## Screenshots
 ![screen 1](screenshots/1.png)
